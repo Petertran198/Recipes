@@ -1,8 +1,16 @@
 <div class="row">
   <div class="col-md-5">
-    <app-recipe-list></app-recipe-list>
+    <app-recipe-list (recipeInfo)="selectedRecipe = $event"></app-recipe-list>
   </div>
   <div class="col-md-7">
-    <app-recipe-detail></app-recipe-detail>
+    <app-recipe-detail
+      *ngIf="selectedRecipe; else noRecipe"
+      [recipe]="selectedRecipe"
+    ></app-recipe-detail>
+
+    <!--Using ng-template to conditionally render this component if selectedRecipe is null, template wont show unless condition is met-->
+    <ng-template #noRecipe>
+      <h1>No Recipe Avilable</h1>
+    </ng-template>
   </div>
 </div>
